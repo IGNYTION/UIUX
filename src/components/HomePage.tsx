@@ -96,10 +96,10 @@ export function HomePage() {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-5xl md:text-6xl mb-8 text-gray-900 tracking-tight">
-              An Open Platform to Democratise and Modernise Chip Design
+              Democratise and Modernise Chip Design using Open Source
             </h1>
             <p className="text-xl text-gray-600 mb-10 leading-relaxed">
-            An open-source EDA platform unifying tools, PDKs, and reusable IPs, enhanced with Python-based, GenAI-assisted workflows to make silicon development as accessible and iterative as software—without licenses or lock-in.
+            An Platform unifying open source EDA tools, PDKs, and Reusable Open IP Cores, Enhanced with Python-based, GenAI-assisted workflows to make silicon development as accessible and iterative as software—without licenses or lock-in.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/downloads">
