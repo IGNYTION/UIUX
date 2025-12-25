@@ -18,7 +18,7 @@ export function PlatformPage() {
     },
     {
       icon: <Cpu className="w-8 h-8 text-gray-700" />,
-      title: 'Open PDK for 180nm',
+      title: 'Open PDK',
       description: 'Production-ready process design kit',
       items: [
         'Standard cell library',
@@ -29,7 +29,7 @@ export function PlatformPage() {
     },
     {
       icon: <GitBranch className="w-8 h-8 text-gray-700" />,
-      title: 'Reusable IP Blocks',
+      title: 'Reusable Open IP Blocks',
       description: 'Pre-verified modular components',
       items: [
         'Digital peripherals',
@@ -41,20 +41,22 @@ export function PlatformPage() {
     {
       icon: <Terminal className="w-8 h-8 text-gray-700" />,
       title: 'Python Workflows',
-      description: 'Scriptable automation with GenAI',
+      description: 'Scriptable automation with GenAI ',
       items: [
+        
+        'Python Distribution for Chip Devlopment',
         'Python-based DSL',
         'AI-assisted debugging',
         'Automated optimization',
-        'CI/CD integration',
+        
       ],
     },
   ];
 
   const specs = [
-    { label: 'Process Node', value: '180nm' },
+    { label: 'Process Node', value: '135nm to 180nm' },
     { label: 'Voltage', value: '1.8V / 3.3V' },
-    { label: 'Design Languages', value: 'Verilog, VHDL, Python' },
+    { label: 'Design Languages', value: 'Verilog, SystemC, Python' },
     { label: 'Operating System', value: 'Linux, macOS' },
     { label: 'License', value: 'Apache 2.0' },
     { label: 'Community', value: 'Open source' },
@@ -69,7 +71,7 @@ export function PlatformPage() {
             The Open Silicon Platform
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            A comprehensive platform for 180nm chip design that unifies open-source EDA tools, 
+            A comprehensive platform for chip design that unifies open-source EDA tools, 
             PDKs, and reusable IPs with Python-based workflows
           </p>
         </div>
