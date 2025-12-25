@@ -1,443 +1,266 @@
 import { useState } from 'react';
 import { Button } from './ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './ui/card';
-import { Badge } from './ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Download, Calendar, FileText, CheckCircle, Apple, Monitor, Smartphone } from 'lucide-react';
+import { Card, CardContent } from './ui/card';
+import { Download, Check, FileText, Terminal, BookOpen } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
-import { motion } from 'framer-motion';
 
 export function DownloadsPage() {
-  const [selectedOS, setSelectedOS] = useState('windows');
-  const [hoveredVersion, setHoveredVersion] = useState<number | null>(null);
+  const [selectedOS, setSelectedOS] = useState('linux');
+
+  const handleDownload = (platform: string, version: string) => {
+    toast.success(`Downloading Ignytion ${version} for ${platform}...`);
+  };
 
   const versions = [
     {
-      version: '3.2.0',
-      releaseDate: '2025-11-15',
+      version: '1.0.0',
+      releaseDate: '2025-01-15',
       type: 'Latest Stable',
-      badge: 'Recommended',
-      badgeColor: 'bg-green-500',
+      recommended: true,
       features: [
-        'Enhanced AI-powered defect detection',
-        'Improved performance (40% faster)',
-        'New collaboration features',
-        'Bug fixes and stability improvements',
+        'Complete 180nm PDK',
+        'All open-source EDA tools',
+        'Python workflow support',
+        'GenAI assistance',
+        'Standard cell library',
       ],
-      downloads: {
-        windows: { size: '245 MB', url: '#' },
-        macos: { size: '238 MB', url: '#' },
-        linux: { size: '251 MB', url: '#' },
-      },
-    },
-    {
-      version: '3.1.5',
-      releaseDate: '2025-10-20',
-      type: 'Stable',
-      features: [
-        'Security updates',
-        'Minor bug fixes',
-        'Performance optimizations',
+      platforms: [
+        { name: 'Linux', id: 'linux', size: '450 MB' },
+        { name: 'macOS', id: 'macos', size: '445 MB' },
       ],
-      downloads: {
-        windows: { size: '242 MB', url: '#' },
-        macos: { size: '235 MB', url: '#' },
-        linux: { size: '248 MB', url: '#' },
-      },
-    },
-    {
-      version: '3.0.0',
-      releaseDate: '2025-09-01',
-      type: 'Major Release',
-      features: [
-        'Complete UI redesign',
-        'New simulation engine',
-        'Advanced analytics dashboard',
-        'Cross-platform improvements',
-      ],
-      downloads: {
-        windows: { size: '240 MB', url: '#' },
-        macos: { size: '233 MB', url: '#' },
-        linux: { size: '246 MB', url: '#' },
-      },
     },
   ];
 
-  const systemRequirements = {
-    windows: {
-      minimum: [
-        'Windows 10 (64-bit) or later',
-        'Intel Core i5 or equivalent',
-        '8 GB RAM',
-        '2 GB available disk space',
-        'DirectX 11 compatible graphics',
-      ],
-      recommended: [
-        'Windows 11 (64-bit)',
-        'Intel Core i7 or equivalent',
-        '16 GB RAM',
-        '5 GB available disk space',
-        'Dedicated GPU with 4GB VRAM',
-      ],
-    },
-    macos: {
-      minimum: [
-        'macOS 12 Monterey or later',
-        'Apple M1 or Intel Core i5',
-        '8 GB RAM',
-        '2 GB available disk space',
-        'Metal-compatible graphics',
-      ],
-      recommended: [
-        'macOS 14 Sonoma or later',
-        'Apple M2 or M3',
-        '16 GB RAM',
-        '5 GB available disk space',
-        'Apple Silicon GPU',
-      ],
-    },
-    linux: {
-      minimum: [
-        'Ubuntu 20.04 LTS or equivalent',
-        'Intel Core i5 or equivalent',
-        '8 GB RAM',
-        '2 GB available disk space',
-        'OpenGL 3.3 compatible graphics',
-      ],
-      recommended: [
-        'Ubuntu 22.04 LTS or later',
-        'Intel Core i7 or AMD Ryzen 7',
-        '16 GB RAM',
-        '5 GB available disk space',
-        'Dedicated GPU with 4GB VRAM',
-      ],
-    },
-  };
+  const requirements = [
+    'Linux (Ubuntu 20.04+, Fedora 34+) or macOS 11+',
+    '8 GB RAM minimum (16 GB recommended)',
+    '10 GB free disk space',
+    'Python 3.8 or higher',
+    'Git installed',
+  ];
 
-  const handleDownload = (version: string, os: string) => {
-    toast.success(`Downloading IGNYTION ${version} for ${os}`);
-  };
-
-  const getOSIcon = (os: string) => {
-    switch (os) {
-      case 'windows':
-        return <Monitor className="w-5 h-5" />;
-      case 'macos':
-        return <Apple className="w-5 h-5" />;
-      case 'linux':
-        return <Smartphone className="w-5 h-5" />;
-      default:
-        return <Download className="w-5 h-5" />;
-    }
-  };
+  const quickStart = [
+    'Download and extract the archive',
+    'Run the installation script',
+    'Follow the getting started guide',
+    'Create your first chip design',
+  ];
 
   return (
-    <div className="w-full overflow-hidden">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-orange-50 via-yellow-50 to-white py-20 px-4 relative overflow-hidden">
-        {/* Animated background elements */}
-        <motion.div
-          className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-orange-300 to-yellow-300 rounded-full opacity-20 blur-3xl"
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <motion.h1 
-            className="text-5xl font-bold text-gray-900 mb-6"
-            initial={{ opacity: 0, y: -50, rotateX: -20 }}
-            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            Download
-            <motion.span 
-              className="block bg-gradient-to-r from-orange-600 to-yellow-600 bg-clip-text text-transparent"
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-              }}
-            >
-              IGNYTION
-            </motion.span>
-          </motion.h1>
-          <motion.p 
-            className="text-xl text-gray-600 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            Get the latest version of IGNYTION for your platform. Free for individual use, 
-            with enterprise options available.
-          </motion.p>
+    <div className="w-full">
+      {/* Hero */}
+      <section className="bg-white py-20 px-4 border-b border-gray-200">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-5xl mb-6 text-gray-900">
+            Download Ignytion
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Get started with open-source chip design for 180nm. All tools, PDKs, and libraries 
+            included—completely free.
+          </p>
         </div>
       </section>
 
-      {/* Platform Selector */}
-      <section className="py-12 px-4 bg-white border-b border-gray-200">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {['windows', 'macos', 'linux'].map((os, index) => (
-              <motion.button
-                key={os}
-                onClick={() => setSelectedOS(os)}
-                className={`p-6 rounded-xl border-2 transition-all ${
-                  selectedOS === os
-                    ? 'border-orange-600 bg-orange-50'
-                    : 'border-gray-200 hover:border-orange-300'
-                }`}
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -5,
-                  boxShadow: '0 10px 30px rgba(251, 146, 60, 0.2)',
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <motion.div 
-                  className="flex items-center justify-center space-x-3"
-                  animate={{
-                    rotateY: selectedOS === os ? [0, 360] : 0,
-                  }}
-                  transition={{ duration: 0.6 }}
-                >
-                  {getOSIcon(os)}
-                  <span className="font-semibold text-gray-900 capitalize">{os}</span>
-                </motion.div>
-              </motion.button>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Main Download */}
+      <section className="bg-white py-20 px-4">
+        <div className="max-w-4xl mx-auto">
+          {versions.map((release, index) => (
+            <Card key={index} className={`${release.recommended ? 'border-orange-500 border-2' : 'border-gray-200'} mb-8`}>
+              {release.recommended && (
+                <div className="bg-orange-500 text-white px-6 py-2 rounded-t-lg">
+                  <p className="text-sm">Recommended Release</p>
+                </div>
+              )}
+              <CardContent className="p-8">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                  <div>
+                    <h2 className="text-3xl mb-2 text-gray-900">Version {release.version}</h2>
+                    <p className="text-gray-600">
+                      Released {new Date(release.releaseDate).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}
+                    </p>
+                  </div>
+                  <div className="mt-4 md:mt-0">
+                    <span className="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-lg">
+                      {release.type}
+                    </span>
+                  </div>
+                </div>
 
-      {/* Versions Section */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <motion.h2 
-            className="text-3xl font-bold text-gray-900 mb-12"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            Available Versions
-          </motion.h2>
-          
-          <div className="space-y-6">
-            {versions.map((version, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -50, rotateY: -10 }}
-                whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                onHoverStart={() => setHoveredVersion(index)}
-                onHoverEnd={() => setHoveredVersion(null)}
-                style={{ perspective: '1000px' }}
-              >
-                <motion.div
-                  whileHover={{ 
-                    scale: 1.02,
-                    boxShadow: '0 20px 50px rgba(251, 146, 60, 0.2)',
-                  }}
-                >
-                  <Card className="overflow-hidden relative">
-                    {/* Animated background on hover */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-orange-100 via-yellow-100 to-orange-100 opacity-0"
-                      animate={{
-                        opacity: hoveredVersion === index ? 0.3 : 0,
-                        backgroundPosition: hoveredVersion === index ? ['0% 50%', '100% 50%', '0% 50%'] : '0% 50%',
-                      }}
-                      transition={{ duration: 2 }}
-                    />
-                    
-                    <CardHeader className="relative z-10">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <motion.div
-                              animate={{
-                                scale: hoveredVersion === index ? 1.1 : 1,
-                              }}
-                            >
-                              <CardTitle className="text-2xl">Version {version.version}</CardTitle>
-                            </motion.div>
-                            {version.badge && (
-                              <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ delay: 0.2 + index * 0.1 }}
-                              >
-                                <Badge className={`${version.badgeColor} text-white`}>
-                                  {version.badge}
-                                </Badge>
-                              </motion.div>
-                            )}
-                            <Badge variant="outline">{version.type}</Badge>
+                <div className="mb-8">
+                  <h3 className="text-lg mb-4 text-gray-900">What's Included</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {release.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-start space-x-2">
+                        <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-700">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-lg text-gray-900">Select Platform</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {release.platforms.map((platform) => (
+                      <div
+                        key={platform.id}
+                        className={`p-4 border-2 rounded-lg cursor-pointer transition-colors ${
+                          selectedOS === platform.id
+                            ? 'border-orange-500 bg-orange-50'
+                            : 'border-gray-200 hover:border-gray-300'
+                        }`}
+                        onClick={() => setSelectedOS(platform.id)}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="text-lg text-gray-900">{platform.name}</h4>
+                            <p className="text-sm text-gray-600">{platform.size}</p>
                           </div>
-                          <CardDescription className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4" />
-                            Released on {new Date(version.releaseDate).toLocaleDateString('en-US', { 
-                              year: 'numeric', 
-                              month: 'long', 
-                              day: 'numeric' 
-                            })}
-                          </CardDescription>
-                        </div>
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                        >
-                          <Button
-                            size="lg"
-                            onClick={() => handleDownload(version.version, selectedOS)}
-                            className="bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white shadow-lg shadow-orange-300"
-                          >
-                            <Download className="w-5 h-5 mr-2" />
-                            Download ({version.downloads[selectedOS as keyof typeof version.downloads].size})
-                          </Button>
-                        </motion.div>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="relative z-10">
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className="font-semibold text-gray-900 mb-3">What's New:</h4>
-                          <ul className="space-y-2">
-                            {version.features.map((feature, idx) => (
-                              <motion.li 
-                                key={idx} 
-                                className="flex items-start space-x-2"
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.05 }}
-                                whileHover={{ x: 10 }}
-                              >
-                                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                                <span className="text-gray-700">{feature}</span>
-                              </motion.li>
-                            ))}
-                          </ul>
-                        </div>
-                        <div className="flex items-center gap-4 pt-4 border-t border-gray-200">
-                          <motion.div whileHover={{ scale: 1.05 }}>
-                            <Button variant="ghost" size="sm">
-                              <FileText className="w-4 h-4 mr-2" />
-                              Release Notes
-                            </Button>
-                          </motion.div>
-                          <motion.div whileHover={{ scale: 1.05 }}>
-                            <Button variant="ghost" size="sm">
-                              View Changelog
-                            </Button>
-                          </motion.div>
+                          {selectedOS === platform.id && (
+                            <Check className="w-6 h-6 text-orange-500" />
+                          )}
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
+                    ))}
+                  </div>
+
+                  <Button
+                    size="lg"
+                    className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                    onClick={() => handleDownload(selectedOS, release.version)}
+                  >
+                    <Download className="w-5 h-5 mr-2" />
+                    Download for {release.platforms.find(p => p.id === selectedOS)?.name}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
 
       {/* System Requirements */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12">System Requirements</h2>
-          
-          <Tabs defaultValue="windows" className="w-full">
-            <TabsList className="grid w-full max-w-md grid-cols-3 mb-8">
-              <TabsTrigger value="windows">Windows</TabsTrigger>
-              <TabsTrigger value="macos">macOS</TabsTrigger>
-              <TabsTrigger value="linux">Linux</TabsTrigger>
-            </TabsList>
-            
-            {Object.entries(systemRequirements).map(([os, requirements]) => (
-              <TabsContent key={os} value={os}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Minimum Requirements</CardTitle>
-                      <CardDescription>
-                        Basic requirements to run IGNYTION
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-3">
-                        {requirements.minimum.map((req, idx) => (
-                          <li key={idx} className="flex items-start space-x-2">
-                            <CheckCircle className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                            <span className="text-gray-700">{req}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Recommended Requirements</CardTitle>
-                      <CardDescription>
-                        For optimal performance and experience
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-3">
-                        {requirements.recommended.map((req, idx) => (
-                          <li key={idx} className="flex items-start space-x-2">
-                            <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                            <span className="text-gray-700">{req}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
+      <section className="bg-gray-50 py-20 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Card className="border-gray-200">
+              <CardContent className="p-8">
+                <Terminal className="w-8 h-8 text-gray-700 mb-4" />
+                <h3 className="text-xl mb-4 text-gray-900">System Requirements</h3>
+                <ul className="space-y-3">
+                  {requirements.map((req, index) => (
+                    <li key={index} className="flex items-start space-x-2">
+                      <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{req}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="border-gray-200">
+              <CardContent className="p-8">
+                <BookOpen className="w-8 h-8 text-gray-700 mb-4" />
+                <h3 className="text-xl mb-4 text-gray-900">Quick Start</h3>
+                <ol className="space-y-3">
+                  {quickStart.map((step, index) => (
+                    <li key={index} className="flex items-start space-x-3">
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-sm">
+                        {index + 1}
+                      </span>
+                      <span className="text-gray-700 mt-0.5">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
 
-      {/* Help Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-orange-600 to-yellow-600">
-        <div className="max-w-4xl mx-auto text-center text-white">
-          <h2 className="text-4xl font-bold mb-4">
-            Need Help Installing?
+      {/* Installation */}
+      <section className="bg-white py-20 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl mb-8 text-gray-900 text-center">
+            Installation
           </h2>
-          <p className="text-xl mb-8 opacity-90">
-            Check our installation guides and documentation for step-by-step instructions.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg"
-              className="bg-white text-orange-600 hover:bg-gray-100"
-            >
-              <FileText className="w-5 h-5 mr-2" />
-              View Documentation
-            </Button>
-            <Button 
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white/10"
-            >
-              Contact Support
-            </Button>
+
+          <Card className="border-gray-200">
+            <CardContent className="p-8">
+              <h3 className="text-lg mb-4 text-gray-900">Linux / macOS</h3>
+              <div className="bg-gray-900 text-gray-100 p-4 rounded-lg font-mono text-sm mb-4 overflow-x-auto">
+                <p># Extract the archive</p>
+                <p>tar -xzf ignytion-1.0.0-linux.tar.gz</p>
+                <p className="mt-2"># Run installer</p>
+                <p>cd ignytion-1.0.0</p>
+                <p>./install.sh</p>
+                <p className="mt-2"># Verify installation</p>
+                <p>ignytion --version</p>
+              </div>
+              <p className="text-gray-600">
+                For detailed installation instructions, see our{' '}
+                <a href="#" className="text-orange-500 hover:text-orange-600">
+                  installation guide
+                </a>
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Resources */}
+      <section className="bg-gray-50 py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl mb-12 text-gray-900 text-center">
+            Next Steps
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center p-8 border border-gray-200 rounded-lg bg-white">
+              <BookOpen className="w-8 h-8 mx-auto mb-4 text-gray-700" />
+              <h3 className="text-lg mb-2 text-gray-900">Documentation</h3>
+              <p className="text-gray-600 mb-4">Complete guides and tutorials</p>
+              <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50">
+                Read Docs
+              </Button>
+            </div>
+
+            <div className="text-center p-8 border border-gray-200 rounded-lg bg-white">
+              <FileText className="w-8 h-8 mx-auto mb-4 text-gray-700" />
+              <h3 className="text-lg mb-2 text-gray-900">Release Notes</h3>
+              <p className="text-gray-600 mb-4">See what's new</p>
+              <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50">
+                View Changes
+              </Button>
+            </div>
+
+            <div className="text-center p-8 border border-gray-200 rounded-lg bg-white">
+              <Terminal className="w-8 h-8 mx-auto mb-4 text-gray-700" />
+              <h3 className="text-lg mb-2 text-gray-900">Get Help</h3>
+              <p className="text-gray-600 mb-4">Community support</p>
+              <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50">
+                Ask Question
+              </Button>
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* License */}
+      <section className="bg-white py-16 px-4 border-t border-gray-200">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-xl mb-4 text-gray-900">Open Source License</h3>
+          <p className="text-gray-600">
+            Ignytion is licensed under the Apache 2.0 license. Free to use for commercial and 
+            non-commercial purposes. See{' '}
+            <a href="#" className="text-orange-500 hover:text-orange-600">
+              license details
+            </a>
+          </p>
         </div>
       </section>
     </div>

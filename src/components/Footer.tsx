@@ -1,47 +1,60 @@
 import { Link } from 'react-router-dom';
-import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Github, Twitter, Linkedin } from 'lucide-react';
+import logo from 'figma:asset/a37de56a9345d9bebb7300f1af18d254a49e7dd8.png';
 
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-white border-t border-gray-200">
+      {/* Trust Strip */}
+      <div className="border-b border-gray-200 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap justify-center items-center gap-4 text-sm text-gray-600">
+            <span>Open-source EDA</span>
+            <span className="text-gray-300">•</span>
+            <span>Open PDKs</span>
+            <span className="text-gray-300">•</span>
+            <span>Reusable IPs</span>
+            <span className="text-gray-300">•</span>
+            <span>GenAI-assisted workflows</span>
+            <span className="text-gray-300">•</span>
+            <span>Software-like pipelines</span>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">I</span>
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
-                IGNYTION
-              </span>
-            </div>
-            <p className="text-sm text-gray-400">
-              An open-source EDA platform unifying tools, PDKs, and reusable IPs with GenAI-assisted workflows.
+            <Link to="/" className="inline-block mb-4">
+              <img src={logo} alt="Ignytion" className="h-10" />
+            </Link>
+            <p className="text-sm text-gray-600">
+              Open-source EDA platform for 180nm chip design
             </p>
           </div>
 
-          {/* Products */}
+          {/* Platform */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Platform</h3>
+            <h3 className="text-sm mb-4 text-gray-900">Platform</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/platform" className="hover:text-orange-400 transition-colors text-sm">
+                <Link to="/platform" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Overview
                 </Link>
               </li>
               <li>
-                <Link to="/use-cases" className="hover:text-orange-400 transition-colors text-sm">
+                <Link to="/use-cases" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Use Cases
                 </Link>
               </li>
               <li>
-                <Link to="/pricing" className="hover:text-orange-400 transition-colors text-sm">
+                <Link to="/pricing" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Pricing
                 </Link>
               </li>
               <li>
-                <Link to="/downloads" className="hover:text-orange-400 transition-colors text-sm">
+                <Link to="/downloads" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Downloads
                 </Link>
               </li>
@@ -50,61 +63,64 @@ export function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Resources</h3>
+            <h3 className="text-sm mb-4 text-gray-900">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/docs" className="hover:text-orange-400 transition-colors text-sm">
+                <Link to="/docs" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Documentation
                 </Link>
               </li>
               <li>
-                <Link to="/docs" className="hover:text-orange-400 transition-colors text-sm">
+                <Link to="/docs" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Tutorials
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-orange-400 transition-colors text-sm">
-                  Support
-                </Link>
+                <a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Community Forum
+                </a>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-orange-400 transition-colors text-sm">
-                  Contact Us
-                </Link>
+                <a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  GitHub
+                </a>
               </li>
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Company */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Connect</h3>
-            <div className="flex space-x-4 mb-4">
-              <a href="#" className="hover:text-orange-400 transition-colors">
-                <Github className="w-5 h-5" />
-              </a>
-              <a href="#" className="hover:text-orange-400 transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="hover:text-orange-400 transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="#" className="hover:text-orange-400 transition-colors">
-                <Mail className="w-5 h-5" />
-              </a>
-            </div>
-            <p className="text-sm text-gray-400">
-              contact@ignytion.com
-            </p>
+            <h3 className="text-sm mb-4 text-gray-900">Company</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/contact" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Blog
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center text-gray-400">
-          <div className="mb-4">
-            <p className="text-xs text-gray-500">
-              Open-source EDA • Open PDKs • Reusable IPs • GenAI-assisted workflows • Software-like pipelines
-            </p>
+        <div className="border-t border-gray-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-sm text-gray-600">
+            © {new Date().getFullYear()} Ignytion. Open-source EDA platform.
+          </p>
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <Github className="w-5 h-5" />
+            </a>
+            <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <Twitter className="w-5 h-5" />
+            </a>
+            <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <Linkedin className="w-5 h-5" />
+            </a>
           </div>
-          <p>&copy; {new Date().getFullYear()} IGNYTION. All rights reserved.</p>
         </div>
       </div>
     </footer>

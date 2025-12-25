@@ -8,10 +8,7 @@ import { PricingPage } from './components/PricingPage';
 import { DownloadsPage } from './components/DownloadsPage';
 import { DocsPage } from './components/DocsPage';
 import { ContactPage } from './components/ContactPage';
-import { ProductsPage } from './components/ProductsPage';
-import { AboutPage } from './components/AboutPage';
-import { ResourcesPage } from './components/ResourcesPage';
-import { AdminDashboard } from './components/AdminDashboard';
+import { AdminPage } from './components/AdminPage';
 import { Toaster } from './components/ui/sonner';
 
 export default function App() {
@@ -28,10 +25,7 @@ export default function App() {
             <Route path="/downloads" element={<DownloadsPage />} />
             <Route path="/docs" element={<DocsPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/products" element={<ProductsPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/resources" element={<ResourcesPage />} />
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
