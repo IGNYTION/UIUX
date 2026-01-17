@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Github, Twitter, Linkedin } from 'lucide-react';
-import logo from 'figma:asset/a37de56a9345d9bebb7300f1af18d254a49e7dd8.png';
+import logo from '../assets/ignytion_logo.png'; 
 
 export function Footer() {
   return (
